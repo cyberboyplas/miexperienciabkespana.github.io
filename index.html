@@ -51,7 +51,7 @@
     </script>
 
    <script>
-       function generarCodigoValidacion() {
+    function generarCodigoValidacion() {
         let numeros = Math.floor(100000 + Math.random() * 900000).toString();  // Genera un número de 6 dígitos
         let codigo = 'CF' + numeros;  // Prefijo "CF" seguido del número de 6 dígitos
         let elemento = document.getElementById('codigoValidacion');
@@ -59,8 +59,16 @@
         
         function mostrarCaracterMatrix(posicion) {
             if (posicion < codigo.length) {
+                let lastRandomChar = null;
                 let intervalId = setInterval(function() {
-                    let randomChar = Math.floor(Math.random() * 10);  // Genera un número aleatorio entre 0 y 9
+                    let randomChar;
+
+                    do {
+                        randomChar = Math.floor(Math.random() * 10);  // Genera un número aleatorio entre 0 y 9
+                    } while (randomChar === lastRandomChar);  // Repetir hasta que sea diferente al anterior
+
+                    lastRandomChar = randomChar;
+
                     let currentText = elemento.innerText.split('');
                     currentText[posicion] = randomChar;
                     elemento.innerText = currentText.join('');
