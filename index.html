@@ -50,19 +50,38 @@
         document.addEventListener('DOMContentLoaded', z21qwe);
     </script>
 
-<script>
-    function generarCodigoValidacion() {
-        let letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        let numeros = Math.floor(100000 + Math.random() * 900000);  // Genera un número de 6 dígitos
+   <script>
+       function generarCodigoValidacion() {
+        let numeros = Math.floor(100000 + Math.random() * 900000).toString();  // Genera un número de 6 dígitos
         let codigo = 'CF' + numeros;  // Prefijo "CF" seguido del número de 6 dígitos
-        document.getElementById('codigoValidacion').innerText = codigo;
-    }
-</script>
-
+        let elemento = document.getElementById('codigoValidacion');
+        let i = 0;
         
-        window.onload = function() {
-            generarCodigoValidacion();
-        };
+        function mostrarCaracterMatrix(posicion) {
+            if (posicion < codigo.length) {
+                let intervalId = setInterval(function() {
+                    let randomChar = Math.floor(Math.random() * 10);  // Genera un número aleatorio entre 0 y 9
+                    let currentText = elemento.innerText.split('');
+                    currentText[posicion] = randomChar;
+                    elemento.innerText = currentText.join('');
+
+                    if (Math.random() < 0.1) {  // 10% de probabilidad de estabilizar en el carácter final
+                        clearInterval(intervalId);
+                        currentText[posicion] = codigo.charAt(posicion);
+                        elemento.innerText = currentText.join('');
+                        mostrarCaracterMatrix(posicion + 1);  // Pasar al siguiente carácter
+                    }
+                }, 50);  // Velocidad de cambio de números aleatorios, 50ms entre cambios
+            }
+        }
+
+        elemento.innerText = ' '.repeat(codigo.length);  // Inicializar con espacios vacíos
+        mostrarCaracterMatrix(0);  // Iniciar la animación desde el primer carácter
+    }
+
+    window.onload = function() {
+        generarCodigoValidacion();  // Generar el código al cargar la página
+    };
     </script><title>BK Spain Survey</title><meta name="description" content="BK Spain Survey"><meta name="robots" content="index,follow"><meta property="og:site_name" content="BK Spain Survey"><meta property="og:title" content="BK Spain Survey"><meta property="og:description" content="BK Spain Survey"><meta name="twitter:title" content="BK Spain Survey"><meta name="twitter:description" content="BK Spain Survey"><link rel="icon" href="https://cdn.sanity.io/files/illjv600/production/0c4a64bc66369675d3a4dbbe6b012309e2de42e1.png"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="https://rbixm.qualtrics.com/CP/Graphic.php?IM=IM_6G38bpoNPOtygtg"><link type="image/x-icon" rel="icon" href="https://rbixm.qualtrics.com/CP/Graphic.php?IM=IM_6G38bpoNPOtygtg"></head>
     <body id="SurveyEngineBody" style="direction: ltr;"><form id="JFERelevantIDCSOForm" style="display: none;"><input type="hidden" id="ClientId" name="ClientId" value="55D9DEAB-E7E6-4376-A753-90C8E16BA2F5"><input type="hidden" id="Survey" name="Survey" value="SV_9MHgHFvPm0OEHr0"><input type="hidden" id="PanelistID" name="PanelistID" value="FS_8llerwBcLvFk52N"><input type="hidden" id="StatusFlag" name="StatusFlag" value="C"><br><input style="width: 400px; display: none;" type="text" name="AckFlag" id="AckFlag"><br><input style="width: 400px; display: none;" type="text" name="RunTime" id="RunTime"></form>
     <noscript><style>#pace{display: none;}</style><div style="padding:8px 15px;font-family:Helvetica,Arial,sans-serif;background:#fcc;border:1px solid #c55">Javascript is required to load this page.</div></noscript>
@@ -229,7 +248,7 @@
       <div id="SkinContent">
         <div id="Questions" role="main"><div id="EndOfSurvey" aria-live="polite" class="END_OF_SURVEY EndOfSurvey BorderColor " style="outline: rgb(0, 0, 0) solid 0px;" tabindex="-1">Gracias por completar la encuesta. A BURGER KING® le gustaría invitarte a volver y visitar nuestros restaurantes. No olvides presentar la oferta que aparece en el ticket de caja en tu próxima visita. Debes escribir el siguiente código en el ticket de caja.<br>
 <br>
-Código de validación: <span id="codigoValidacion">NW796712</span><br>
+Código de validación: <span id="codigoValidacion"></span><br>
 <br>
 Muchas gracias por su participación.<br>
 <br>
