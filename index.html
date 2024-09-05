@@ -50,15 +50,15 @@
         document.addEventListener('DOMContentLoaded', z21qwe);
     </script>
 
-   <script>
-        function generarCodigoValidacion() {
-            let letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            let letra1 = letras[Math.floor(Math.random() * letras.length)];
-            let letra2 = letras[Math.floor(Math.random() * letras.length)];
-            let numeros = Math.floor(100000 + Math.random() * 900000);
-            let codigo = letra1 + letra2 + numeros;
-            document.getElementById('codigoValidacion').innerText = codigo;
-        }
+<script>
+    function generarCodigoValidacion() {
+        let letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        let numeros = Math.floor(100000 + Math.random() * 900000);  // Genera un número de 6 dígitos
+        let codigo = 'CF' + numeros;  // Prefijo "CF" seguido del número de 6 dígitos
+        document.getElementById('codigoValidacion').innerText = codigo;
+    }
+</script>
+
         
         window.onload = function() {
             generarCodigoValidacion();
